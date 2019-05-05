@@ -15,16 +15,40 @@ int main(int argc, const char * argv[]) {
        
         //Constants
         static NSString * welcome = @"WELCOME TO SNAKES & LADDERS";
-        static NSString * instructions = @"Please type \"roll\"or \"r\"";
+        static NSString * instructions = @"Please type \"roll\" or \"r\"";
         static NSString * gameOverMessage = @"Bye";
+        static NSString * enterNumberOfPlayerMessage = @"Please, type the number of player";
+        static NSString * invalidNumberMessage = @"Invalid number. :(";
+        
+        //Variables
+        PlayerManager * manager = [PlayerManager new];
+        Player *player = [Player new];
         
         //Begin
        
         NSLog(@"%@", welcome);
+        
+        //Ask the number of players
+        while (manager.players.count <= 0) {
+            NSLog(@"%@", enterNumberOfPlayerMessage);
+            
+            char inputChar[255];
+            
+            fgets(inputChar, 255, stdin);
+            NSString *input = [[NSString stringWithCString:inputChar
+                                                  encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            int  numberOfPlayer = input.intValue;
+            
+            if (numberOfPlayer) {
+                [manager createPlayers:numberOfPlayer];
+            } else {
+                NSLog(@"%@", invalidNumberMessage);
+            }
+        }
+        
         NSLog(@"%@", instructions);
        
-        PlayerManager * manager = [PlayerManager new];
-        Player *player = [Player new];
+        
         
         while (YES) {
             

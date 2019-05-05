@@ -22,6 +22,7 @@
     
     for (int i = 0; i <numberOfPlayers ; i++) {
         Player * player = [Player new];
+        player.name = [NSString stringWithFormat: @"player%i", i];
         [_players addObject: player];
         
     }
