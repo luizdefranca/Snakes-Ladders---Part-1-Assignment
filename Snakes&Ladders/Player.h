@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Player : NSObject
 //Properties
 @property (nonatomic) NSInteger currentSquare;
+@property (nonatomic, assign) NSDictionary * gameLogic;
 //Methods
 -(void) roll;
 @end
