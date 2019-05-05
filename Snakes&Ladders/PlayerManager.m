@@ -39,12 +39,21 @@
 }
 
 -(Player*) currentPlayer {
-    return _players[_currentIndex % _players.count];
+    return _players[(_currentIndex % _players.count) ];
 }
 
 
 -(BOOL) gameOver {
-    
-    return self.currentPlayer.gameOver;
+   // self.currentPlayer.gameOver;
+    return _players[(_currentIndex - 1) % _players.count].gameOver;
+}
+-(NSString*) score{
+    NSMutableString * score = [NSMutableString stringWithString: @"score: "];
+    for (Player * player in _players) {
+        [score appendFormat:@"%@: %lu, ", player.name, player.currentSquare];
+    }
+    //Remove the last comma.
+    [score replaceCharactersInRange: NSMakeRange([score length] -2, 1) withString: @""] ;
+    return score;
 }
 @end

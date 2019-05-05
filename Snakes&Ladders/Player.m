@@ -36,30 +36,30 @@
     //Variables
     NSInteger die = [self randomNumberBetween:1 andMax:6];
     NSMutableString *message = [NSMutableString new];
-    [ message appendFormat: @"\n%@%lu\n", rolledDieMessage, die ];
+    [ message appendFormat: @"%@%lu\n", rolledDieMessage, die ];
     
-//    NSLog(@"%@%lu", rolledDieMessage, die);
-    
+
     NSNumber * candidateSquare = [NSNumber numberWithInteger: _currentSquare + die];
     
     NSNumber *nextSquare = _gameLogic[candidateSquare];
     if (nextSquare) {
         if([nextSquare isLessThan: candidateSquare]) {
             [message appendFormat: @"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue ];
-            //NSLog(@"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue);
+            
         } else {
             [message appendFormat: @"%@%lu to %i", ladderMessage, candidateSquare.integerValue, nextSquare.intValue];
-            //NSLog(@"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue);
+           
         }
         _currentSquare = nextSquare.integerValue;
     } else {
         _currentSquare = candidateSquare.integerValue;
         if(_currentSquare >= 100) {
             _gameOver = YES;
-            _output = gameOverMessage;
+            [message appendFormat: @"%@%lu\n", landedOnMessage, _currentSquare];
+            [message appendFormat: @"\n%@", gameOverMessage ];
         } else {
             [message appendFormat: @"%@%lu", landedOnMessage, _currentSquare];
-            //NSLog(@"%@%lu", landedOnMessage, _currentSquare);
+           
         }
     }
     

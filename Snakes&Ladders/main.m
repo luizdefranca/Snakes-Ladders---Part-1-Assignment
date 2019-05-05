@@ -28,30 +28,27 @@ int main(int argc, const char * argv[]) {
        
         NSLog(@"%@", welcome);
         
-        //Ask the number of players
-        while (manager.players.count <= 0) {
-            NSLog(@"%@", enterNumberOfPlayerMessage);
-            
-            char inputChar[255];
-            
-            fgets(inputChar, 255, stdin);
-            NSString *input = [[NSString stringWithCString:inputChar
-                                                  encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
-            int  numberOfPlayer = input.intValue;
-            
-            if (numberOfPlayer) {
-                [manager createPlayers:numberOfPlayer];
-                NSLog(@"Number of Players: %lu", manager.players.count);
-            } else {
-                NSLog(@"%@", invalidNumberMessage);
+        do {
+            //Ask the number of players
+            while (manager.players.count <= 0) {
+                NSLog(@"%@", enterNumberOfPlayerMessage);
+                
+                char inputCharPlayers[255];
+                
+                fgets(inputCharPlayers, 255, stdin);
+                NSString *inputPlayers = [[NSString stringWithCString:inputCharPlayers
+                                                      encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+                int  numberOfPlayer = inputPlayers.intValue;
+                
+                if (numberOfPlayer) {
+                    [manager createPlayers:numberOfPlayer];
+                    NSLog(@"Number of Players: %lu", manager.players.count);
+                    break;
+                } else {
+                    NSLog(@"%@", invalidNumberMessage);
+                }
             }
-        }
-        
-        
-       
-        
-        
-        while (YES) {
+            
             NSLog(@"%@", instructions);
             
             char inputChar[255];
@@ -63,17 +60,20 @@ int main(int argc, const char * argv[]) {
             if ([input isEqualToString:@"roll"] || [input isEqualToString:@"r"]) {
                 
                 [manager roll];
-                NSString *output = manager.output;
-                //NSLog(@"Player%lu", ([manager currentIndex] % manager.players.count) + 1);
-                NSLog(@"%@", output);
+                
                 if([manager gameOver]) {
-                    NSLog(@"%@", manager.output) ;
-                    break;
+                    NSLog(@"%@", manager.output);
+                    NSLog(@"%@", [manager score]);
+                    [manager.players removeAllObjects];
+                    continue;
+                } else {
+                    NSLog(@"%@", manager.output);
+                    NSLog(@"%@", [manager score]);
                 }
             }
             
-        }
-        NSLog(@"%@", gameOverMessage);
+        }while(YES);
+        
     }
     return 0;
 }
