@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Player.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -20,6 +21,8 @@ int main(int argc, const char * argv[]) {
         NSLog(@"%@", welcome);
         NSLog(@"%@", instructions);
         
+        Player *player = [Player new];
+        
         while (gameON) {
             
             
@@ -30,7 +33,7 @@ int main(int argc, const char * argv[]) {
                                                      encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
             
             if ([input isEqualToString:@"roll"] || [input isEqualToString:@"r"]) {
-                
+                [player roll];
             }
             
         }

@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Player : NSObject
-
+//Properties
+@property (nonatomic) NSInteger currentSquare;
+//Methods
+-(void) roll;
 @end
 
 NS_ASSUME_NONNULL_END
