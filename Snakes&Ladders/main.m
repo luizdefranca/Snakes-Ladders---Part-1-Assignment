@@ -15,15 +15,16 @@ int main(int argc, const char * argv[]) {
         //Constants
         static NSString * welcome = @"WELCOME TO SNAKES & LADDERS";
         static NSString * instructions = @"Please type \"roll\"or \"r\"";
+        static NSString * gameOverMessage = @"Bye";
         
         //Begin
-        BOOL gameON = YES;
+       
         NSLog(@"%@", welcome);
         NSLog(@"%@", instructions);
         
         Player *player = [Player new];
         
-        while (gameON) {
+        while (YES) {
             
             
             char inputChar[255];
@@ -34,10 +35,14 @@ int main(int argc, const char * argv[]) {
             
             if ([input isEqualToString:@"roll"] || [input isEqualToString:@"r"]) {
                 [player roll];
+                if(player.gameOver) {
+                    NSLog(@"%@", player.output) ;
+                    break;
+                }
             }
             
         }
-        
+        NSLog(@"%@", gameOverMessage);
     }
     return 0;
 }

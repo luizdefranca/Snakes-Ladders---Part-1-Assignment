@@ -16,6 +16,7 @@
     if (self) {
         _currentSquare = 0;
         _gameLogic = @{@4:@14, @17:@7, @9:@31, @20:@38, @40:@89, @51:@67, @63:@81, @64:@60, @89:@26, @95:@75, @99:@78};
+        _gameOver = NO;
        
     }
     return self;
@@ -27,8 +28,9 @@
     
     static NSString * rolledDieMessage = @"You rolled a ";
     static NSString * landedOnMessage = @"You landed on ";
-    static NSString * ladderMessage = @"Stairway to heaven! You jumped from";
-    static NSString * snakeMessage = @"Bad luck! You have to come back from";
+    static NSString * ladderMessage = @"Stairway to heaven! You jumped from ";
+    static NSString * snakeMessage = @"Bad luck! You have to come back from ";
+    static NSString * gameOverMessage = @"YOU WIN. CONGRATULATION!!!";
     
     NSInteger die = [self randomNumberBetween:1 andMax:6];
     
@@ -39,17 +41,24 @@
     NSNumber *nextSquare = _gameLogic[candidateSquare];
     if (nextSquare) {
         if([nextSquare isLessThan: candidateSquare]){
-            NSLog(@"%@%lu to %i", snakeMessage, _currentSquare, nextSquare.intValue);
+            NSLog(@"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue);
         } else {
-            NSLog(@"%@%lu to %i", ladderMessage, _currentSquare, nextSquare.intValue);
+            NSLog(@"%@%lu to %i", ladderMessage, candidateSquare.integerValue, nextSquare.intValue);
         }
         _currentSquare = nextSquare.integerValue;
     } else {
-        NSLog(@"%@%lu", ladderMessage, candidateSquare.integerValue);
         _currentSquare = candidateSquare.integerValue;
+        if(_currentSquare >= 100){
+            _gameOver = YES;
+            _output = gameOverMessage;
+        } else {
+            NSLog(@"%@%lu", landedOnMessage, _currentSquare);
+        }
+        
+        
     }
-   
-    NSLog(@"currentSquare after increment value -> %lu", _currentSquare);
+    
+    
 }
 
 //Private Method
