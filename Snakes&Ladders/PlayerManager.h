@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString*) score;
 -(Player*) currentPlayer;
 -(BOOL) gameOver;
+-(void) restart;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -21,6 +21,7 @@ int main(int argc, const char * argv[]) {
         static NSString * invalidNumberMessage = @"Invalid number. :(";
         
         //Variables
+        BOOL gameOn = YES;
         PlayerManager * manager = [PlayerManager new];
         
         
@@ -56,6 +57,11 @@ int main(int argc, const char * argv[]) {
             fgets(inputChar, 255, stdin);
             NSString *input = [[NSString stringWithCString:inputChar
                                                      encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            input = [input lowercaseString];
+            
+            if ([input isEqualToString: @"quit"] || [input isEqualToString: @"q"]) {
+                gameOn = NO;
+            }
             
             if ([input isEqualToString:@"roll"] || [input isEqualToString:@"r"]) {
                 
@@ -64,7 +70,7 @@ int main(int argc, const char * argv[]) {
                 if([manager gameOver]) {
                     NSLog(@"%@", manager.output);
                     NSLog(@"%@", [manager score]);
-                    [manager.players removeAllObjects];
+                    [manager restart];
                     continue;
                 } else {
                     NSLog(@"%@", manager.output);
@@ -72,7 +78,7 @@ int main(int argc, const char * argv[]) {
                 }
             }
             
-        }while(YES);
+        }while(gameOn);
         
     }
     return 0;

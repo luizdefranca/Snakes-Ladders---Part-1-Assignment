@@ -44,7 +44,7 @@
 
 
 -(BOOL) gameOver {
-   // self.currentPlayer.gameOver;
+   
     return _players[(_currentIndex - 1) % _players.count].gameOver;
 }
 -(NSString*) score{
@@ -56,4 +56,8 @@
     [score replaceCharactersInRange: NSMakeRange([score length] -2, 1) withString: @""] ;
     return score;
 }
+
+-(void) restart{
+    [_players removeAllObjects];
+};
 @end
