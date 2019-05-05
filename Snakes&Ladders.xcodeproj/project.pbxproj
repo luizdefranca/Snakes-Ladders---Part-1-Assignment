@@ -10,6 +10,7 @@
 		250EA059227EB19900EDC73B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 250EA058227EB19900EDC73B /* main.m */; };
 		250EA061227EB38F00EDC73B /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 250EA060227EB38F00EDC73B /* Player.m */; };
 		250EA064227ED31D00EDC73B /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 250EA063227ED31D00EDC73B /* PlayerManager.m */; };
+		250EA067227F9F4400EDC73B /* InputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 250EA066227F9F4400EDC73B /* InputController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		250EA060227EB38F00EDC73B /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		250EA062227ED31D00EDC73B /* PlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerManager.h; sourceTree = "<group>"; };
 		250EA063227ED31D00EDC73B /* PlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerManager.m; sourceTree = "<group>"; };
+		250EA065227F9F4400EDC73B /* InputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
+		250EA066227F9F4400EDC73B /* InputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 				250EA058227EB19900EDC73B /* main.m */,
 				250EA05F227EB38F00EDC73B /* Player.h */,
 				250EA060227EB38F00EDC73B /* Player.m */,
+				250EA065227F9F4400EDC73B /* InputController.h */,
+				250EA066227F9F4400EDC73B /* InputController.m */,
 				250EA062227ED31D00EDC73B /* PlayerManager.h */,
 				250EA063227ED31D00EDC73B /* PlayerManager.m */,
 			);
@@ -128,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				250EA067227F9F4400EDC73B /* InputController.m in Sources */,
 				250EA061227EB38F00EDC73B /* Player.m in Sources */,
 				250EA059227EB19900EDC73B /* main.m in Sources */,
 				250EA064227ED31D00EDC73B /* PlayerManager.m in Sources */,

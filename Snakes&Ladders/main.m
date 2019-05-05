@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "PlayerManager.h"
+#import "InputController.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -19,11 +20,12 @@ int main(int argc, const char * argv[]) {
         static NSString * gameOverMessage = @"Bye";
         static NSString * enterNumberOfPlayerMessage = @"Please, type the number of player:";
         static NSString * invalidNumberMessage = @"Invalid number. :(";
+        static NSString * confirmationMessage = @"Would you like to \"quit\" or \"restart\"";
         
         //Variables
         BOOL gameOn = YES;
         PlayerManager * manager = [PlayerManager new];
-        
+        InputController *inputController = [InputController new];
         
         //Begin
        
@@ -33,12 +35,7 @@ int main(int argc, const char * argv[]) {
             //Ask the number of players
             while (manager.players.count <= 0) {
                 NSLog(@"%@", enterNumberOfPlayerMessage);
-                
-                char inputCharPlayers[255];
-                
-                fgets(inputCharPlayers, 255, stdin);
-                NSString *inputPlayers = [[NSString stringWithCString:inputCharPlayers
-                                                      encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+                NSString *inputPlayers = [inputController stringFromInput];
                 int  numberOfPlayer = inputPlayers.intValue;
                 
                 if (numberOfPlayer) {
@@ -51,16 +48,20 @@ int main(int argc, const char * argv[]) {
             }
             
             NSLog(@"%@", instructions);
-            
-            char inputChar[255];
-            
-            fgets(inputChar, 255, stdin);
-            NSString *input = [[NSString stringWithCString:inputChar
-                                                     encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            NSString *input = [inputController stringFromInput];
             input = [input lowercaseString];
             
             if ([input isEqualToString: @"quit"] || [input isEqualToString: @"q"]) {
-                gameOn = NO;
+                NSLog(@"%@", confirmationMessage);
+                NSString * confirmation = [inputController stringFromInput];
+                if ([confirmation isEqualToString:@"q"] || [confirmation isEqualToString: @"quit"]) {
+                    gameOn = NO;
+                    NSLog(@"%@", gameOverMessage);
+                } else {
+                    [manager restart];
+                    continue;
+                }
+                
             }
             
             if ([input isEqualToString:@"roll"] || [input isEqualToString:@"r"]) {
