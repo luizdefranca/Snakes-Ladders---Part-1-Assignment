@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Player.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayerManager : NSObject
 
 //Properties
 @property (nonatomic, strong) NSMutableArray * players;
+
+//Methods
+-(void) createPlayers: (int) numberOfPlayers;
 @end
 
 NS_ASSUME_NONNULL_END

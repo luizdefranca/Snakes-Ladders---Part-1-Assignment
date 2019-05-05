@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Player.h"
+#import "PlayerManager.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -21,7 +22,8 @@ int main(int argc, const char * argv[]) {
        
         NSLog(@"%@", welcome);
         NSLog(@"%@", instructions);
-        
+       
+        PlayerManager * manager = [PlayerManager new];
         Player *player = [Player new];
         
         while (YES) {
