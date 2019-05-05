@@ -9,13 +9,28 @@
 #import "Player.h"
 
 @implementation Player
--(void) roll{
-    
-    NSInteger dice = [self randomNumberBetween:1 andMax:6];
-    NSLog(@"%lu", dice);
+//Initializers
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _currentSquare = 0;
+    }
+    return self;
 }
 
 
+//Methods
+-(void) roll{
+    
+    NSInteger die = [self randomNumberBetween:1 andMax:6];
+    NSLog(@"%lu", die);
+    NSLog(@"currentSquare -> %lu", _currentSquare);
+    _currentSquare += die;
+    NSLog(@"currentSquare after increment value -> %lu", _currentSquare);
+}
+
+//Private Method
 -(NSInteger)randomNumberBetween: (NSInteger) min andMax:(NSInteger) max {
     return  (min + arc4random_uniform((uint32_t)(max - min + 1)));
 }
