@@ -26,39 +26,44 @@
 //Methods
 -(void) roll{
     
+    //Constant messages
     static NSString * rolledDieMessage = @"You rolled a ";
     static NSString * landedOnMessage = @"You landed on ";
     static NSString * ladderMessage = @"Stairway to heaven! You jumped from ";
     static NSString * snakeMessage = @"Bad luck! You have to come back from ";
     static NSString * gameOverMessage = @"YOU WIN. CONGRATULATION!!!";
     
+    //Variables
     NSInteger die = [self randomNumberBetween:1 andMax:6];
+    NSMutableString *message = [NSMutableString new];
+    [ message appendFormat: @"\n%@%lu\n", rolledDieMessage, die ];
     
-    NSLog(@"%@%lu", rolledDieMessage, die);
+//    NSLog(@"%@%lu", rolledDieMessage, die);
     
     NSNumber * candidateSquare = [NSNumber numberWithInteger: _currentSquare + die];
     
     NSNumber *nextSquare = _gameLogic[candidateSquare];
     if (nextSquare) {
-        if([nextSquare isLessThan: candidateSquare]){
-            NSLog(@"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue);
+        if([nextSquare isLessThan: candidateSquare]) {
+            [message appendFormat: @"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue ];
+            //NSLog(@"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue);
         } else {
-            NSLog(@"%@%lu to %i", ladderMessage, candidateSquare.integerValue, nextSquare.intValue);
+            [message appendFormat: @"%@%lu to %i", ladderMessage, candidateSquare.integerValue, nextSquare.intValue];
+            //NSLog(@"%@%lu to %i", snakeMessage, candidateSquare.integerValue, nextSquare.intValue);
         }
         _currentSquare = nextSquare.integerValue;
     } else {
         _currentSquare = candidateSquare.integerValue;
-        if(_currentSquare >= 100){
+        if(_currentSquare >= 100) {
             _gameOver = YES;
             _output = gameOverMessage;
         } else {
-            NSLog(@"%@%lu", landedOnMessage, _currentSquare);
+            [message appendFormat: @"%@%lu", landedOnMessage, _currentSquare];
+            //NSLog(@"%@%lu", landedOnMessage, _currentSquare);
         }
-        
-        
     }
     
-    
+    _output = message;
 }
 
 //Private Method

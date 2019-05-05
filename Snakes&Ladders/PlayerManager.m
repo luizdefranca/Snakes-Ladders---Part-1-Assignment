@@ -14,17 +14,37 @@
     self = [super init];
     if (self) {
         _players = [NSMutableArray new];
+        _currentIndex = 0;
     }
     return self;
 }
 
--(void) createPlayers: (int) numberOfPlayers{
+-(void) createPlayers: (int) numberOfPlayers {
     
     for (int i = 0; i <numberOfPlayers ; i++) {
         Player * player = [Player new];
-        player.name = [NSString stringWithFormat: @"player%i", i];
+        player.name = [NSString stringWithFormat: @"player%i", i+1];
         [_players addObject: player];
         
     }
+}
+
+-(void) roll  {
+    Player *actualPlayer = self.currentPlayer;
+    [actualPlayer roll];
+    _output = [actualPlayer.output stringByReplacingOccurrencesOfString:@"You" withString: actualPlayer.name];
+    _output = [_output stringByReplacingOccurrencesOfString:@"YOU" withString: actualPlayer.name];
+    
+    _currentIndex ++;
+}
+
+-(Player*) currentPlayer {
+    return _players[_currentIndex % _players.count];
+}
+
+
+-(BOOL) gameOver {
+    
+    return self.currentPlayer.gameOver;
 }
 @end

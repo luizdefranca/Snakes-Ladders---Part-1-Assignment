@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Player.h"
+
 #import "PlayerManager.h"
 
 int main(int argc, const char * argv[]) {
@@ -17,12 +17,12 @@ int main(int argc, const char * argv[]) {
         static NSString * welcome = @"WELCOME TO SNAKES & LADDERS";
         static NSString * instructions = @"Please type \"roll\" or \"r\"";
         static NSString * gameOverMessage = @"Bye";
-        static NSString * enterNumberOfPlayerMessage = @"Please, type the number of player";
+        static NSString * enterNumberOfPlayerMessage = @"Please, type the number of player:";
         static NSString * invalidNumberMessage = @"Invalid number. :(";
         
         //Variables
         PlayerManager * manager = [PlayerManager new];
-        Player *player = [Player new];
+        
         
         //Begin
        
@@ -41,17 +41,18 @@ int main(int argc, const char * argv[]) {
             
             if (numberOfPlayer) {
                 [manager createPlayers:numberOfPlayer];
+                NSLog(@"Number of Players: %lu", manager.players.count);
             } else {
                 NSLog(@"%@", invalidNumberMessage);
             }
         }
         
-        NSLog(@"%@", instructions);
+        
        
         
         
         while (YES) {
-            
+            NSLog(@"%@", instructions);
             
             char inputChar[255];
             
@@ -60,9 +61,13 @@ int main(int argc, const char * argv[]) {
                                                      encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
             
             if ([input isEqualToString:@"roll"] || [input isEqualToString:@"r"]) {
-                [player roll];
-                if(player.gameOver) {
-                    NSLog(@"%@", player.output) ;
+                
+                [manager roll];
+                NSString *output = manager.output;
+                //NSLog(@"Player%lu", ([manager currentIndex] % manager.players.count) + 1);
+                NSLog(@"%@", output);
+                if([manager gameOver]) {
+                    NSLog(@"%@", manager.output) ;
                     break;
                 }
             }

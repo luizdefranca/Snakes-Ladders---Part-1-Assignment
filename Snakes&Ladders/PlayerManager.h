@@ -14,9 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 //Properties
 @property (nonatomic, strong) NSMutableArray * players;
-
+@property (nonatomic) NSInteger currentIndex;
+@property (nonatomic, strong) NSString * output;
 //Methods
 -(void) createPlayers: (int) numberOfPlayers;
+-(void) roll;
+
+-(Player*) currentPlayer;
+-(BOOL) gameOver;
 @end
 
 NS_ASSUME_NONNULL_END
